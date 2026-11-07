@@ -1,4 +1,4 @@
-const CACHE_NAME = 'pass-zoo-mnhn-v1';
+const CACHE_NAME = 'pass-zoo-mnhn-v3';
 const ASSETS = [
   './',
   './index.html',
@@ -33,8 +33,18 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
+// Network-first with offline cache fallback so updates appear immediately when online
 self.addEventListener('fetch', (event) => {
+  if (event.request.method !== 'GET') return;
   event.respondWith(
-    caches.match(event.request).then((cached) => cached || fetch(event.request))
+    fetch(event.request)
+      .then((response) => {
+        if (response && response.status === 200) {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+        }
+        return response;
+      })
+      .catch(() => caches.match(event.request))
   );
 });
