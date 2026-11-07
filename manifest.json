@@ -1,0 +1,18 @@
+{
+  "name": "Pass Zoo de Vincennes & Muséum — Famille Lefèvre",
+  "short_name": "Pass Zoo",
+  "description": "Accès hors-ligne instantané aux Pass SOLO (Saison 2026-2027), QR Codes plein écran et e-tickets PDF du Parc Zoologique de Paris et du MNHN.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#061b14",
+  "theme_color": "#061b14",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
