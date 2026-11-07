@@ -16,8 +16,6 @@
     :root {
       --bg-deep: #04130e;
       --bg-card: #0b251c;
-      --bg-card-elevated: #113428;
-      --bg-glass: rgba(17, 52, 40, 0.78);
       --border-subtle: rgba(16, 185, 129, 0.22);
       --border-gold: rgba(245, 158, 11, 0.45);
       --emerald: #10b981;
@@ -27,11 +25,8 @@
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --text-soft: #cbd5e1;
-      --danger: #ef4444;
-      --radius-xl: 24px;
-      --radius-lg: 18px;
-      --radius-md: 12px;
-      --shadow-lg: 0 20px 45px -15px rgba(0, 0, 0, 0.7);
+      --radius-xl: 22px;
+      --shadow-lg: 0 18px 40px -15px rgba(0, 0, 0, 0.65);
     }
 
     * {
@@ -43,79 +38,72 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: radial-gradient(circle at 50% 0%, #0f382a 0%, var(--bg-deep) 65%);
+      background: radial-gradient(circle at 50% 0%, #0f382a 0%, var(--bg-deep) 70%);
       color: var(--text-main);
       min-height: 100vh;
-      padding-bottom: 100px;
-      line-height: 1.45;
+      padding-bottom: 40px;
+      line-height: 1.4;
       overflow-x: hidden;
     }
 
-    /* Top Header */
     .header {
       position: sticky;
       top: 0;
       z-index: 30;
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
-      background: rgba(4, 19, 14, 0.84);
+      background: rgba(4, 19, 14, 0.88);
       border-bottom: 1px solid var(--border-subtle);
-      padding: max(14px, env(safe-area-inset-top)) 18px 14px;
+      padding: max(12px, env(safe-area-inset-top)) 16px 12px;
     }
 
     .header-inner {
-      max-width: 760px;
+      max-width: 700px;
       margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 10px;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .brand-logo {
-      width: 44px;
-      height: 44px;
-      border-radius: 13px;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
       background: linear-gradient(135deg, #10b981 0%, #047857 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 23px;
-      box-shadow: 0 6px 18px rgba(16, 185, 129, 0.35);
+      font-size: 19px;
       flex-shrink: 0;
     }
 
     .brand-title {
-      font-size: 1.08rem;
+      font-size: 0.98rem;
       font-weight: 800;
-      letter-spacing: -0.02em;
       color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 7px;
     }
 
     .brand-sub {
-      font-size: 0.76rem;
+      font-size: 0.73rem;
       color: var(--emerald-light);
       font-weight: 600;
-      letter-spacing: 0.02em;
     }
 
     .status-pill {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 6px 11px;
+      padding: 5px 10px;
       border-radius: 999px;
-      background: rgba(16, 185, 129, 0.16);
-      border: 1px solid rgba(16, 185, 129, 0.4);
+      background: rgba(16, 185, 129, 0.14);
+      border: 1px solid rgba(16, 185, 129, 0.35);
       color: var(--emerald-light);
       font-size: 0.72rem;
       font-weight: 700;
@@ -127,127 +115,57 @@
       height: 7px;
       border-radius: 50%;
       background: var(--emerald-light);
-      box-shadow: 0 0 8px var(--emerald-light);
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.45; transform: scale(0.88); }
     }
 
     .container {
-      max-width: 760px;
+      max-width: 700px;
       margin: 0 auto;
-      padding: 18px 16px;
+      padding: 16px;
     }
 
-    /* Quick Gate Banner */
-    .gate-banner {
-      background: linear-gradient(135deg, rgba(245, 158, 11, 0.18) 0%, rgba(16, 185, 129, 0.15) 100%);
-      border: 1px solid var(--border-gold);
-      border-radius: var(--radius-lg);
-      padding: 14px 16px;
-      margin-bottom: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      box-shadow: 0 10px 28px -12px rgba(0, 0, 0, 0.5);
-    }
-
-    .gate-banner-text h2 {
-      font-size: 0.92rem;
-      font-weight: 800;
-      color: var(--gold-light);
-      margin-bottom: 2px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .gate-banner-text p {
-      font-size: 0.78rem;
-      color: var(--text-soft);
-    }
-
-    .gate-btn {
-      background: linear-gradient(135deg, var(--gold) 0%, #d97706 100%);
-      color: #04130e;
-      border: none;
-      border-radius: 12px;
-      padding: 10px 14px;
-      font-weight: 800;
-      font-size: 0.8rem;
-      cursor: pointer;
-      white-space: nowrap;
-      box-shadow: 0 6px 16px rgba(245, 158, 11, 0.35);
-      transition: transform 0.15s ease;
-    }
-
-    .gate-btn:active {
-      transform: scale(0.96);
-    }
-
-    /* Pass Selector Tabs */
+    /* Simple 3-way Switcher */
     .pass-switcher {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      gap: 8px;
-      background: rgba(8, 28, 21, 0.9);
-      padding: 6px;
-      border-radius: 16px;
+      gap: 6px;
+      background: rgba(8, 28, 21, 0.92);
+      padding: 5px;
+      border-radius: 14px;
       border: 1px solid var(--border-subtle);
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     .switch-tab {
       border: none;
       background: transparent;
       color: var(--text-muted);
-      padding: 10px 8px;
-      border-radius: 11px;
-      font-size: 0.82rem;
-      font-weight: 700;
+      padding: 10px 6px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 800;
       cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2px;
-    }
-
-    .switch-tab span.sub {
-      font-size: 0.66rem;
-      font-weight: 600;
-      opacity: 0.75;
+      transition: all 0.15s ease;
     }
 
     .switch-tab.active {
-      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      background: var(--emerald);
       color: #04130e;
-      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
-    }
-
-    .switch-tab.active span.sub {
-      color: #04130e;
-      opacity: 0.85;
     }
 
     /* Pass Cards Grid */
     .passes-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 20px;
+      gap: 16px;
     }
 
-    @media (min-width: 700px) {
+    @media (min-width: 660px) {
       .passes-grid.dual-mode {
         grid-template-columns: 1fr 1fr;
       }
     }
 
-    /* Individual Wallet Pass Card */
+    /* Clean Wallet Pass Card */
     .wallet-card {
       background: linear-gradient(165deg, #103326 0%, #071b14 100%);
       border: 1px solid rgba(52, 211, 153, 0.32);
@@ -255,7 +173,6 @@
       overflow: hidden;
       box-shadow: var(--shadow-lg);
       position: relative;
-      transition: transform 0.2s ease;
     }
 
     .wallet-card::before {
@@ -264,95 +181,61 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 5px;
-      background: linear-gradient(90deg, var(--emerald), var(--gold), var(--emerald));
+      height: 4px;
+      background: linear-gradient(90deg, var(--emerald), var(--gold));
     }
 
     .card-top {
-      padding: 20px 20px 14px;
+      padding: 16px 18px 12px;
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      border-bottom: 1px dashed rgba(255, 255, 255, 0.14);
-    }
-
-    .card-badge-group {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
+      align-items: center;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.12);
     }
 
     .museum-tag {
-      font-size: 0.68rem;
+      font-size: 0.67rem;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       color: var(--emerald-light);
       font-weight: 800;
+      display: block;
+      margin-bottom: 2px;
     }
 
     .pass-name {
-      font-size: 1.45rem;
+      font-size: 1.3rem;
       font-weight: 900;
       letter-spacing: -0.02em;
       color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 8px;
     }
 
     .pass-pill-num {
       font-size: 0.74rem;
-      background: rgba(245, 158, 11, 0.2);
+      background: rgba(245, 158, 11, 0.18);
       border: 1px solid var(--border-gold);
       color: var(--gold-light);
-      padding: 3px 9px;
+      padding: 4px 10px;
       border-radius: 99px;
       font-weight: 800;
+      white-space: nowrap;
     }
 
-    .validity-box {
-      text-align: right;
-      background: rgba(0, 0, 0, 0.28);
-      padding: 7px 11px;
-      border-radius: 11px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .validity-label {
-      font-size: 0.63rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--text-muted);
-      display: block;
-    }
-
-    .validity-date {
-      font-size: 0.88rem;
-      font-weight: 800;
-      color: var(--emerald-light);
-    }
-
-    /* QR Code Section (High Contrast for Turnstiles) */
+    /* QR Code Section */
     .qr-section {
-      padding: 22px 20px 18px;
+      padding: 18px 18px 14px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      background: radial-gradient(circle at center, rgba(16, 185, 129, 0.12) 0%, transparent 70%);
     }
 
     .qr-frame {
       background: #ffffff;
-      padding: 16px;
-      border-radius: 22px;
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.55), 0 0 0 4px rgba(16, 185, 129, 0.35);
+      padding: 14px;
+      border-radius: 18px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
       cursor: pointer;
-      position: relative;
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
-    }
-
-    .qr-frame:hover {
-      transform: scale(1.02);
+      transition: transform 0.15s ease;
     }
 
     .qr-frame:active {
@@ -361,128 +244,52 @@
 
     .qr-frame img {
       display: block;
-      width: 220px;
-      height: 220px;
+      width: 205px;
+      height: 205px;
       image-rendering: pixelated;
       image-rendering: crisp-edges;
     }
 
-    .qr-tap-hint {
+    .ticket-num-line {
       margin-top: 11px;
       font-size: 0.78rem;
-      font-weight: 700;
-      color: var(--gold-light);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-    }
-
-    .holder-custom-label {
-      margin-top: 12px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      padding: 6px 13px;
-      border-radius: 999px;
-      font-size: 0.8rem;
       color: var(--text-soft);
-      cursor: pointer;
-    }
-
-    .holder-custom-label strong {
-      color: #fff;
-    }
-
-    /* Ticket Metadata Grid */
-    .meta-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      padding: 14px 20px;
-      background: rgba(0, 0, 0, 0.22);
-      border-top: 1px solid rgba(255, 255, 255, 0.07);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-    }
-
-    .meta-item {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .meta-label {
-      font-size: 0.67rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--text-muted);
       font-weight: 600;
     }
 
-    .meta-value {
-      font-size: 0.85rem;
-      font-weight: 700;
+    .ticket-num-line strong {
       color: #fff;
       font-variant-numeric: tabular-nums;
     }
 
-    .adherent-code-bar {
-      padding: 10px 20px;
-      background: rgba(0, 0, 0, 0.35);
-      font-family: "SF Mono", Menlo, Consolas, monospace;
-      font-size: 0.68rem;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      overflow-x: auto;
-    }
-
-    .copy-mini-btn {
-      background: rgba(255, 255, 255, 0.1);
-      color: var(--text-soft);
-      border: none;
-      border-radius: 6px;
-      padding: 4px 8px;
-      font-size: 0.66rem;
-      font-weight: 700;
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-
     /* Card Action Buttons */
     .card-actions {
-      padding: 16px 20px;
+      padding: 0 18px 16px;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
+      gap: 8px;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 7px;
-      padding: 11px 12px;
-      border-radius: 12px;
+      gap: 6px;
+      padding: 10px;
+      border-radius: 11px;
       font-size: 0.8rem;
       font-weight: 700;
       text-decoration: none;
       border: 1px solid transparent;
       cursor: pointer;
-      transition: all 0.15s ease;
       text-align: center;
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--emerald) 0%, #059669 100%);
+      background: var(--emerald);
       color: #04130e;
       font-weight: 800;
       grid-column: span 2;
-      box-shadow: 0 6px 16px rgba(16, 185, 129, 0.28);
     }
 
     .btn-secondary {
@@ -491,107 +298,45 @@
       color: var(--text-main);
     }
 
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.12);
-    }
-
-    /* Section Cards below */
-    .section-card {
-      margin-top: 22px;
-      background: var(--bg-card);
+    /* Discreet Collapsible Footer */
+    details.footer-details {
+      margin-top: 18px;
+      background: rgba(11, 37, 28, 0.65);
       border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-xl);
-      padding: 20px;
-      box-shadow: var(--shadow-lg);
+      border-radius: 14px;
+      padding: 12px 16px;
     }
 
-    .section-title {
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 14px;
+    details.footer-details summary {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-soft);
+      cursor: pointer;
+      list-style: none;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
     }
 
-    .sites-grid {
-      display: grid;
-      grid-template-columns: 1fr;
+    details.footer-details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .details-body {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
       gap: 10px;
     }
 
-    @media (min-width: 560px) {
-      .sites-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    .site-item {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 14px;
-      padding: 12px 14px;
+    .details-links {
       display: flex;
-      align-items: flex-start;
-      gap: 11px;
-    }
-
-    .site-icon {
-      font-size: 1.4rem;
-      line-height: 1;
-      margin-top: 2px;
-    }
-
-    .site-info h4 {
-      font-size: 0.85rem;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 2px;
-    }
-
-    .site-info p {
-      font-size: 0.74rem;
-      color: var(--text-muted);
-    }
-
-    .site-badge {
-      display: inline-block;
-      margin-top: 5px;
-      font-size: 0.65rem;
-      font-weight: 800;
-      padding: 2px 7px;
-      border-radius: 6px;
-      background: rgba(16, 185, 129, 0.18);
-      color: var(--emerald-light);
-    }
-
-    /* Account & Order Dossier Box */
-    .dossier-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    .dossier-stat {
-      background: rgba(0, 0, 0, 0.25);
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      padding: 11px 13px;
-      border-radius: 12px;
-    }
-
-    .dossier-stat span {
-      font-size: 0.68rem;
-      color: var(--text-muted);
-      display: block;
-      text-transform: uppercase;
-    }
-
-    .dossier-stat strong {
-      font-size: 0.9rem;
-      color: #fff;
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
     /* Fullscreen Turnstile Scanner Modal */
@@ -599,7 +344,7 @@
       position: fixed;
       inset: 0;
       z-index: 100;
-      background: rgba(2, 10, 7, 0.96);
+      background: rgba(2, 10, 7, 0.97);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       display: none;
@@ -615,7 +360,7 @@
 
     .modal-top {
       width: 100%;
-      max-width: 460px;
+      max-width: 440px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -647,10 +392,10 @@
       background: rgba(255, 255, 255, 0.12);
       color: #fff;
       border: none;
-      width: 40px;
-      height: 40px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       font-weight: 800;
       cursor: pointer;
     }
@@ -661,42 +406,42 @@
       align-items: center;
       text-align: center;
       width: 100%;
-      max-width: 420px;
+      max-width: 400px;
     }
 
     .modal-qr-box {
       background: #ffffff;
-      padding: 24px;
-      border-radius: 28px;
-      box-shadow: 0 0 60px rgba(255, 255, 255, 0.25);
-      margin-bottom: 18px;
+      padding: 22px;
+      border-radius: 26px;
+      box-shadow: 0 0 50px rgba(255, 255, 255, 0.22);
+      margin-bottom: 16px;
     }
 
     .modal-qr-box img {
-      width: min(72vw, 300px);
-      height: min(72vw, 300px);
+      width: min(72vw, 290px);
+      height: min(72vw, 290px);
       display: block;
       image-rendering: pixelated;
     }
 
     .modal-card-preview img {
-      max-width: min(84vw, 340px);
+      max-width: min(84vw, 330px);
       max-height: 62vh;
-      border-radius: 18px;
+      border-radius: 16px;
       box-shadow: 0 18px 45px rgba(0, 0, 0, 0.7);
       display: block;
       margin-bottom: 14px;
     }
 
     .modal-title {
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       font-weight: 900;
       color: #fff;
       margin-bottom: 4px;
     }
 
     .modal-sub {
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       color: var(--emerald-light);
       font-weight: 700;
       margin-bottom: 8px;
@@ -704,19 +449,16 @@
 
     .modal-code {
       font-family: "SF Mono", Menlo, monospace;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: var(--text-muted);
       background: rgba(255, 255, 255, 0.06);
-      padding: 6px 12px;
+      padding: 5px 10px;
       border-radius: 8px;
     }
 
     .brightness-tip {
-      font-size: 0.76rem;
+      font-size: 0.75rem;
       color: var(--gold-light);
-      display: flex;
-      align-items: center;
-      gap: 6px;
     }
 
     .toast {
@@ -727,13 +469,12 @@
       background: #10b981;
       color: #04130e;
       font-weight: 800;
-      font-size: 0.82rem;
-      padding: 10px 18px;
+      font-size: 0.8rem;
+      padding: 9px 16px;
       border-radius: 999px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
       opacity: 0;
       pointer-events: none;
-      transition: all 0.22s ease;
+      transition: all 0.2s ease;
       z-index: 200;
     }
 
@@ -745,276 +486,122 @@
 </head>
 <body>
 
-  <!-- Sticky Top Bar -->
   <header class="header">
     <div class="header-inner">
       <div class="brand">
         <div class="brand-logo" aria-hidden="true">🦒</div>
         <div>
-          <div class="brand-title">Zoo de Vincennes & MNHN</div>
-          <div class="brand-sub">Pass Annuels • Thomas Lefèvre & Marie Parizot</div>
+          <div class="brand-title">Pass Zoo & MNHN</div>
+          <div class="brand-sub">Thomas Lefèvre & Marie Parizot</div>
         </div>
       </div>
       <div class="status-pill" id="validCountdownPill">
         <span class="status-dot"></span>
-        <span id="daysRemainingText">Actif • 14/11/2027</span>
+        <span id="daysRemainingText">Valable 14/11/2027</span>
       </div>
     </div>
   </header>
 
   <main class="container">
-    <!-- Turnstile Quick Banner -->
-    <section class="gate-banner">
-      <div class="gate-banner-text">
-        <h2>⚡ Passage Rapide aux Portiques</h2>
-        <p>2 Pass SOLO Nominatifs (Thomas LEFEVRE & Marie PARIZOT) • Hors-ligne</p>
-      </div>
-      <button class="gate-btn" onclick="openScannerModal(1, 'qr')">
-        plein écran QR
-      </button>
-    </section>
-
-    <!-- View Mode Switcher -->
     <div class="pass-switcher" role="tablist" aria-label="Sélection du Pass">
-      <button class="switch-tab active" id="tab-both" onclick="switchPassView('both')">
-        <span>Les 2 Pass</span>
-        <span class="sub">Thomas & Marie</span>
-      </button>
-      <button class="switch-tab" id="tab-1" onclick="switchPassView('1')">
-        <span>Pass #1 • Thomas</span>
-        <span class="sub" id="tab1SubLabel">Thomas LEFEVRE • 730</span>
-      </button>
-      <button class="switch-tab" id="tab-2" onclick="switchPassView('2')">
-        <span>Pass #2 • Marie</span>
-        <span class="sub" id="tab2SubLabel">Marie PARIZOT • 442</span>
-      </button>
+      <button class="switch-tab active" id="tab-both" onclick="switchPassView(both)">Les 2 Pass</button>
+      <button class="switch-tab" id="tab-1" onclick="switchPassView(1)">Thomas</button>
+      <button class="switch-tab" id="tab-2" onclick="switchPassView(2)">Marie</button>
     </div>
 
-    <!-- Passes Container -->
     <div class="passes-grid dual-mode" id="passesGrid">
 
-      <!-- PASS SOLO #1 -->
+      <!-- PASS #1 : THOMAS LEFEVRE -->
       <article class="wallet-card" id="passCard1">
         <div class="card-top">
-          <div class="card-badge-group">
-            <span class="museum-tag">Parc Zoologique de Paris • MNHN</span>
-            <h3 class="pass-name">
-              Thomas LEFEVRE
-              <span class="pass-pill-num">Pass #1 • 730</span>
-            </h3>
+          <div>
+            <span class="museum-tag">Pass SOLO Annuel</span>
+            <h3 class="pass-name" id="holderLabel1">Thomas LEFEVRE</h3>
           </div>
-          <div class="validity-box">
-            <span class="validity-label">Valable jusqu'au</span>
-            <span class="validity-date">14 NOV. 2027</span>
-          </div>
+          <span class="pass-pill-num">N° 730</span>
         </div>
 
         <div class="qr-section">
-          <div class="qr-frame" onclick="openScannerModal(1, 'qr')" title="Toucher pour agrandir au portique">
-            <img id="qrImg1" alt="QR Code Pass SOLO 1" />
+          <div class="qr-frame" onclick="openScannerModal(1, qr)" title="Toucher pour agrandir">
+            <img id="qrImg1" alt="QR Code Thomas LEFEVRE" />
           </div>
-          <div class="qr-tap-hint" onclick="openScannerModal(1, 'qr')">
-            🔍 Toucher le QR code pour plein écran (Portique)
+          <div class="ticket-num-line">
+            Billet <strong>01050041730</strong> • Valable 14/11/2027
           </div>
-          <button class="holder-custom-label" onclick="editPassNote(1)" title="Personnaliser l'étiquette">
-            👤 Titulaire officiel : <strong id="holderLabel1">Thomas LEFEVRE</strong> ✏️
-          </button>
-        </div>
-
-        <div class="meta-grid">
-          <div class="meta-item">
-            <span class="meta-label">N° de Billet / Adhésion</span>
-            <span class="meta-value">01050041730</span>
-          </div>
-          <div class="meta-item">
-            <span class="meta-label">N° de Membre MNHN</span>
-            <span class="meta-value">10876</span>
-          </div>
-          <div class="meta-item">
-            <span class="meta-label">Dossier Commande</span>
-            <span class="meta-value">1358995</span>
-          </div>
-          <div class="meta-item">
-            <span class="meta-label">Tarif & Achat</span>
-            <span class="meta-value">56,00 € (31/10/2026)</span>
-          </div>
-        </div>
-
-        <div class="adherent-code-bar">
-          <span>ID: MNHN_P1-3U25-2HAE-8V40-0120-2610-3100-0020-2711-142359</span>
-          <button class="copy-mini-btn" onclick="copyText('SEMN-HN - 0 - - - - P-AM - 5-0MNH-N - MNH-N_P1-3U25-2HAE-8V40-0120-2610-3100-0020-2711-1423-59')">Copier</button>
         </div>
 
         <div class="card-actions">
-          <button class="btn btn-primary" onclick="openScannerModal(1, 'qr')">
-            📲 Afficher en Plein Écran (Scan Portique)
+          <button class="btn btn-primary" onclick="openScannerModal(1, qr)">
+            📲 Plein Écran QR
           </button>
-          <button class="btn btn-secondary" onclick="openScannerModal(1, 'card')">
-            🪪 Carte Mobile Officielle (Thomas)
+          <button class="btn btn-secondary" onclick="openScannerModal(1, card)">
+            🪪 Carte Mobile
           </button>
           <a class="btn btn-secondary" href="tickets/Pass-SOLO-1-ETICKET.pdf" target="_blank" rel="noopener">
-            📄 E-Ticket PDF A4 (Thomas)
+            📄 PDF
           </a>
         </div>
       </article>
 
-      <!-- PASS SOLO #2 -->
+      <!-- PASS #2 : MARIE PARIZOT -->
       <article class="wallet-card" id="passCard2">
         <div class="card-top">
-          <div class="card-badge-group">
-            <span class="museum-tag">Parc Zoologique de Paris • MNHN</span>
-            <h3 class="pass-name">
-              Marie PARIZOT
-              <span class="pass-pill-num">Pass #2 • 442</span>
-            </h3>
+          <div>
+            <span class="museum-tag">Pass SOLO Annuel</span>
+            <h3 class="pass-name" id="holderLabel2">Marie PARIZOT</h3>
           </div>
-          <div class="validity-box">
-            <span class="validity-label">Valable jusqu'au</span>
-            <span class="validity-date">14 NOV. 2027</span>
-          </div>
+          <span class="pass-pill-num">N° 442</span>
         </div>
 
         <div class="qr-section">
-          <div class="qr-frame" onclick="openScannerModal(2, 'qr')" title="Toucher pour agrandir au portique">
-            <img id="qrImg2" alt="QR Code Pass SOLO 2" />
+          <div class="qr-frame" onclick="openScannerModal(2, qr)" title="Toucher pour agrandir">
+            <img id="qrImg2" alt="QR Code Marie PARIZOT" />
           </div>
-          <div class="qr-tap-hint" onclick="openScannerModal(2, 'qr')">
-            🔍 Toucher le QR code pour plein écran (Portique)
+          <div class="ticket-num-line">
+            Billet <strong>01050042442</strong> • Valable 14/11/2027
           </div>
-          <button class="holder-custom-label" onclick="editPassNote(2)" title="Personnaliser l'étiquette">
-            👤 Titulaire officiel : <strong id="holderLabel2">Marie PARIZOT</strong> ✏️
-          </button>
-        </div>
-
-        <div class="meta-grid">
-          <div class="meta-item">
-            <span class="meta-label">N° de Billet / Adhésion</span>
-            <span class="meta-value">01050042442</span>
-          </div>
-          <div class="meta-item">
-            <span class="meta-label">N° de Membre MNHN</span>
-            <span class="meta-value">10876</span>
-          </div>
-          <div class="meta-item">
-            <span class="meta-label">Dossier Commande</span>
-            <span class="meta-value">1358995</span>
-          </div>
-          <div class="meta-item">
-            <span class="meta-label">Tarif & Achat</span>
-            <span class="meta-value">56,00 € (31/10/2026)</span>
-          </div>
-        </div>
-
-        <div class="adherent-code-bar">
-          <span>ID: MNHN_P1-3RG4-1F9C-IBW0-0120-2610-3100-0020-2711-142359</span>
-          <button class="copy-mini-btn" onclick="copyText('SEMN-HN - 0 - - - - P-AM - 5-0MNH-N - MNH-N_P1-3RG4-1F9C-IBW0-0120-2610-3100-0020-2711-1423-59')">Copier</button>
         </div>
 
         <div class="card-actions">
-          <button class="btn btn-primary" onclick="openScannerModal(2, 'qr')">
-            📲 Afficher en Plein Écran (Scan Portique)
+          <button class="btn btn-primary" onclick="openScannerModal(2, qr)">
+            📲 Plein Écran QR
           </button>
-          <button class="btn btn-secondary" onclick="openScannerModal(2, 'card')">
-            🪪 Carte Mobile Officielle (Marie)
+          <button class="btn btn-secondary" onclick="openScannerModal(2, card)">
+            🪪 Carte Mobile
           </button>
           <a class="btn btn-secondary" href="tickets/Pass-SOLO-2-ETICKET.pdf" target="_blank" rel="noopener">
-            📄 E-Ticket PDF A4 (Marie)
+            📄 PDF
           </a>
         </div>
       </article>
 
     </div>
 
-    <!-- Included Sites & Benefits -->
-    <section class="section-card">
-      <div class="section-title">
-        <span>🌿 Accès Illimité Inclus avec ton Pass Annuel</span>
-        <span style="font-size:0.75rem;color:var(--emerald-light);">Sans réservation hors affluence</span>
-      </div>
-      <div class="sites-grid">
-        <div class="site-item">
-          <div class="site-icon">🦒</div>
-          <div class="site-info">
-            <h4>Parc Zoologique de Paris (Zoo de Vincennes)</h4>
-            <p>Av. Daumesnil, 75012 Paris • Accès direct aux portiques avec le QR code</p>
-            <span class="site-badge">Accès illimité 365j/an</span>
-          </div>
+    <details class="footer-details">
+      <summary>
+        <span>ℹ️ Infos Dossier MNHN (N° 1358995) & PDF</span>
+        <span>▾</span>
+      </summary>
+      <div class="details-body">
+        <div>
+          Compte : <strong>thomaslefevre18@live.fr</strong> • Adhérent n° <strong>10876</strong><br/>
+          Accès illimité : Zoo de Vincennes, Ménagerie, Jardin des Plantes & Galeries, Musée de l'Homme.
         </div>
-        <div class="site-item">
-          <div class="site-icon">🦧</div>
-          <div class="site-info">
-            <h4>Ménagerie, le Zoo du Jardin des Plantes</h4>
-            <p>Place Valhubert / Quai Saint-Bernard, 75005 Paris</p>
-            <span class="site-badge">Accès illimité</span>
-          </div>
-        </div>
-        <div class="site-item">
-          <div class="site-icon">🦕</div>
-          <div class="site-info">
-            <h4>Jardin des Plantes & Galeries</h4>
-            <p>Grande Galerie de l'Évolution, Paléontologie, Minéralogie, Grandes Serres</p>
-            <span class="site-badge">Accès illimité</span>
-          </div>
-        </div>
-        <div class="site-item">
-          <div class="site-icon">🗿</div>
-          <div class="site-info">
-            <h4>Musée de l'Homme & Arboretum Chèvreloup</h4>
-            <p>Place du Trocadéro (75016) & Versailles-Chèvreloup</p>
-            <span class="site-badge">Accès illimité</span>
-          </div>
+        <div class="details-links">
+          <a class="btn btn-secondary" href="tickets/Recapitulatif-Dossier-1358995.pdf" target="_blank" rel="noopener">🧾 Facture PDF</a>
+          <a class="btn btn-secondary" href="tickets/Pass-SOLO-1-MOBILE.pdf" target="_blank" rel="noopener">📱 Pass #1 Mobile</a>
+          <a class="btn btn-secondary" href="tickets/Pass-SOLO-2-MOBILE.pdf" target="_blank" rel="noopener">📱 Pass #2 Mobile</a>
         </div>
       </div>
-    </section>
-
-    <!-- Dossier & Account Summary -->
-    <section class="section-card">
-      <div class="section-title">
-        <span>🗂️ Dossier MNHN & Documents Officiels</span>
-        <button class="copy-mini-btn" onclick="copyText('thomaslefevre18@live.fr')">Copier Email</button>
-      </div>
-      <div class="dossier-list">
-        <div class="dossier-stat">
-          <span>Compte Billetterie</span>
-          <strong>thomaslefevre18@live.fr</strong>
-        </div>
-        <div class="dossier-stat">
-          <span>Dossier Actif</span>
-          <strong>N° 1358995 (Soldé 112 €)</strong>
-        </div>
-        <div class="dossier-stat">
-          <span>N° Contact Client</span>
-          <strong>10876 (Adhérent)</strong>
-        </div>
-        <div class="dossier-stat">
-          <span>Ancien Pass 2024-2025</span>
-          <strong>4667-0369-2280-6646</strong>
-        </div>
-      </div>
-      <div style="display:flex;flex-wrap:wrap;gap:10px;">
-        <a class="btn btn-secondary" href="tickets/Recapitulatif-Dossier-1358995.pdf" target="_blank" rel="noopener">
-          🧾 Récapitulatif / Facture Dossier 1358995 (PDF)
-        </a>
-        <a class="btn btn-secondary" href="tickets/Pass-SOLO-1-MOBILE.pdf" target="_blank" rel="noopener">
-          📱 PDF Mobile Pass #1 (Thomas)
-        </a>
-        <a class="btn btn-secondary" href="tickets/Pass-SOLO-2-MOBILE.pdf" target="_blank" rel="noopener">
-          📱 PDF Mobile Pass #2 (Marie)
-        </a>
-        <a class="btn btn-secondary" href="https://billetterie.mnhn.fr/account/?lang=fr" target="_blank" rel="noopener">
-          🌐 Espace Personnel MNHN
-        </a>
-      </div>
-    </section>
+    </details>
   </main>
 
-  <!-- Fullscreen Scanner Modal -->
   <div class="modal-overlay" id="scannerModal" role="dialog" aria-modal="true">
     <div class="modal-top">
       <div class="modal-pass-switch">
-        <button class="modal-pill-btn active" id="modalBtnPass1" onclick="setModalPass(1)">Pass #1 • Thomas</button>
-        <button class="modal-pill-btn" id="modalBtnPass2" onclick="setModalPass(2)">Pass #2 • Marie</button>
-        <button class="modal-pill-btn" id="modalBtnModeToggle" onclick="toggleModalMode()">🪪 Voir Carte</button>
+        <button class="modal-pill-btn active" id="modalBtnPass1" onclick="setModalPass(1)">Thomas</button>
+        <button class="modal-pill-btn" id="modalBtnPass2" onclick="setModalPass(2)">Marie</button>
+        <button class="modal-pill-btn" id="modalBtnModeToggle" onclick="toggleModalMode()">🪪 Carte</button>
       </div>
       <button class="modal-close" onclick="closeScannerModal()" aria-label="Fermer">✕</button>
     </div>
@@ -1026,17 +613,17 @@
       <div class="modal-card-preview" id="modalCardContainer" style="display:none;">
         <img id="modalCardImg" alt="Carte Mobile Officielle" />
       </div>
-      <div class="modal-title" id="modalTitle">Pass SOLO #1 — Thomas LEFEVRE</div>
+      <div class="modal-title" id="modalTitle">Thomas LEFEVRE</div>
       <div class="modal-sub" id="modalSub">Billet n° 01050041730 • Valable jusqu'au 14/11/2027</div>
       <div class="modal-code" id="modalCode">MNHN_P1-3U25-2HAE-8V40-0120-2610-3100-0020-2711-142359</div>
     </div>
 
     <div class="brightness-tip">
-      ☀️ Astuce portique : augmente la luminosité de ton iPhone au maximum pour un scan immédiat.
+      ☀️ Luminosité au maximum recommandée aux portiques
     </div>
   </div>
 
-  <div class="toast" id="toast">Copié dans le presse-papiers !</div>
+  <div class="toast" id="toast">Copié !</div>
 
   <script>
     const EMBEDDED_ASSETS = {
@@ -1070,20 +657,9 @@
     function renderHolders() {
       [1, 2].forEach(idx => {
         const name = getHolderName(idx);
-        const shortNum = idx === 1 ? '730' : '442';
-        document.getElementById('holderLabel' + idx).textContent = name;
-        document.getElementById('tab' + idx + 'SubLabel').textContent = `${name} • ${shortNum}`;
+        const el = document.getElementById('holderLabel' + idx);
+        if (el) el.textContent = name;
       });
-    }
-
-    function editPassNote(passIdx) {
-      const current = getHolderName(passIdx);
-      const next = prompt("Personnaliser le nom affiché sur le Pass SOLO #" + passIdx + " (ex: Thomas LEFEVRE, Marie PARIZOT...) :", current);
-      if (next !== null && next.trim() !== "") {
-        localStorage.setItem('zoo_pass_holder_v3_' + passIdx, next.trim());
-        renderHolders();
-        showToast("Nom du Pass #" + passIdx + " mis à jour");
-      }
     }
 
     function switchPassView(mode) {
@@ -1144,30 +720,17 @@
         qrBox.style.display = '';
         cardBox.style.display = 'none';
         document.getElementById('modalQrImg').src = item.qr;
-        toggleBtn.textContent = '🪪 Voir Carte';
+        toggleBtn.textContent = '🪪 Carte';
       } else {
         qrBox.style.display = 'none';
         cardBox.style.display = '';
         document.getElementById('modalCardImg').src = item.card;
-        toggleBtn.textContent = '🔳 Voir QR Seul';
+        toggleBtn.textContent = '🔳 QR';
       }
 
-      document.getElementById('modalTitle').textContent = `Pass SOLO #${currentModalPass} — ${holder}`;
+      document.getElementById('modalTitle').textContent = holder;
       document.getElementById('modalSub').textContent = `Billet n° ${item.ticketNum} • Valable jusqu'au 14/11/2027`;
       document.getElementById('modalCode').textContent = item.code;
-    }
-
-    function copyText(txt) {
-      navigator.clipboard.writeText(txt).then(() => {
-        showToast("Copié : " + txt.slice(0, 28) + (txt.length > 28 ? "…" : ""));
-      });
-    }
-
-    function showToast(msg) {
-      const t = document.getElementById('toast');
-      t.textContent = msg;
-      t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 2200);
     }
 
     function updateDaysCountdown() {
@@ -1176,9 +739,9 @@
       const diffDays = Math.ceil((exp - now) / (1000 * 60 * 60 * 24));
       const el = document.getElementById('daysRemainingText');
       if (diffDays > 0) {
-        el.textContent = `Actif • ${diffDays}j restants (14/11/2027)`;
+        el.textContent = `Valable 14/11/2027`;
       } else {
-        el.textContent = `Expiré le 14/11/2027`;
+        el.textContent = `Expiré`;
       }
     }
 
@@ -1188,17 +751,17 @@
     renderHolders();
     updateDaysCountdown();
 
-    // Register Service Worker for offline usage & actively purge old v1/v2 caches
+    // Register Service Worker for offline usage & actively purge old caches
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         if ('caches' in window) {
           caches.keys().then(keys => {
             keys.forEach(k => {
-              if (k !== 'pass-zoo-mnhn-v3') caches.delete(k);
+              if (k !== 'pass-zoo-mnhn-v4') caches.delete(k);
             });
           });
         }
-        navigator.serviceWorker.register('./sw.js?v=3').then((reg) => {
+        navigator.serviceWorker.register('./sw.js?v=4').then((reg) => {
           reg.update();
         }).catch(() => {});
       });
