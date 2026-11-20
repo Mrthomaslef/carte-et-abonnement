@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Pass Zoo de Vincennes & Muséum — Famille Lefèvre</title>
+  <meta name="description" content="Portefeuille numérique hors-ligne des Pass SOLO Parc Zoologique de Paris (Zoo de Vincennes) & Muséum National d'Histoire Naturelle." />
+  <meta name="theme-color" content="#061b14" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Pass Zoo" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/svg+xml" href="assets/icon.svg" />
+  <link rel="apple-touch-icon" href="assets/icon.svg" />
+  <style>
+    :root {
+      --bg-deep: #04130e;
+      --bg-card: #0b251c;
+      --border-subtle: rgba(16, 185, 129, 0.22);
+      --border-gold: rgba(245, 158, 11, 0.45);
+      --emerald: #10b981;
+      --emerald-light: #34d399;
+      --gold: #f59e0b;
+      --gold-light: #fbbf24;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-soft: #cbd5e1;
+      --radius-xl: 22px;
+      --shadow-lg: 0 18px 40px -15px rgba(0, 0, 0, 0.65);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: radial-gradient(circle at 50% 0%, #0f382a 0%, var(--bg-deep) 70%);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding-bottom: 40px;
+      line-height: 1.4;
+      overflow-x: hidden;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      background: rgba(4, 19, 14, 0.88);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: max(12px, env(safe-area-inset-top)) 16px 12px;
+    }
+
+    .header-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 19px;
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .brand-sub {
+      font-size: 0.73rem;
+      color: var(--emerald-light);
+      font-weight: 600;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.14);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: var(--emerald-light);
+      font-size: 0.72rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--emerald-light);
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    /* Simple 3-way Switcher */
+    .pass-switcher {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 6px;
+      background: rgba(8, 28, 21, 0.92);
+      padding: 5px;
+      border-radius: 14px;
+      border: 1px solid var(--border-subtle);
+      margin-bottom: 16px;
+    }
+
+    .switch-tab {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      padding: 10px 6px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .switch-tab.active {
+      background: var(--emerald);
+      color: #04130e;
+    }
+
+    /* Pass Cards Grid */
+    .passes-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    @media (min-width: 660px) {
+      .passes-grid.dual-mode {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* Clean Wallet Pass Card */
+    .wallet-card {
+      background: linear-gradient(165deg, #103326 0%, #071b14 100%);
+      border: 1px solid rgba(52, 211, 153, 0.32);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
+
+    .wallet-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--emerald), var(--gold));
+    }
+
+    .card-top {
+      padding: 16px 18px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.12);
+    }
+
+    .museum-tag {
+      font-size: 0.67rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--emerald-light);
+      font-weight: 800;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .pass-name {
+      font-size: 1.3rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+
+    .pass-pill-num {
+      font-size: 0.74rem;
+      background: rgba(245, 158, 11, 0.18);
+      border: 1px solid var(--border-gold);
+      color: var(--gold-light);
+      padding: 4px 10px;
+      border-radius: 99px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    /* QR Code Section */
+    .qr-section {
+      padding: 18px 18px 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .qr-frame {
+      background: #ffffff;
+      padding: 14px;
+      border-radius: 18px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+
+    .qr-frame:active {
+      transform: scale(0.97);
+    }
+
+    .qr-frame img {
+      display: block;
+      width: 205px;
+      height: 205px;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+    }
+
+    .ticket-num-line {
+      margin-top: 11px;
+      font-size: 0.78rem;
+      color: var(--text-soft);
+      font-weight: 600;
+    }
+
+    .ticket-num-line strong {
+      color: #fff;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Card Action Buttons */
+    .card-actions {
+      padding: 0 18px 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px;
+      border-radius: 11px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-decoration: none;
+      border: 1px solid transparent;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background: var(--emerald);
+      color: #04130e;
+      font-weight: 800;
+      grid-column: span 2;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(255, 255, 255, 0.14);
+      color: var(--text-main);
+    }
+
+    /* Discreet Collapsible Footer */
+    details.footer-details {
+      margin-top: 18px;
+      background: rgba(11, 37, 28, 0.65);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 12px 16px;
+    }
+
+    details.footer-details summary {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-soft);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    details.footer-details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .details-body {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .details-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* Fullscreen Turnstile Scanner Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(2, 10, 7, 0.97);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: max(20px, env(safe-area-inset-top)) 20px max(24px, env(safe-area-inset-bottom));
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-top {
+      width: 100%;
+      max-width: 440px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-pass-switch {
+      display: flex;
+      gap: 8px;
+    }
+
+    .modal-pill-btn {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .modal-pill-btn.active {
+      background: var(--emerald);
+      color: #04130e;
+      border-color: var(--emerald);
+    }
+
+    .modal-close {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      border: none;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .modal-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .modal-qr-box {
+      background: #ffffff;
+      padding: 22px;
+      border-radius: 26px;
+      box-shadow: 0 0 50px rgba(255, 255, 255, 0.22);
+      margin-bottom: 16px;
+    }
+
+    .modal-qr-box img {
+      width: min(72vw, 290px);
+      height: min(72vw, 290px);
+      display: block;
+      image-rendering: pixelated;
+    }
+
+    .modal-card-preview img {
+      max-width: min(84vw, 330px);
+      max-height: 62vh;
+      border-radius: 16px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.7);
+      display: block;
+      margin-bottom: 14px;
+    }
+
+    .modal-title {
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .modal-sub {
+      font-size: 0.85rem;
+      color: var(--emerald-light);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .modal-code {
+      font-family: "SF Mono", Menlo, monospace;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.06);
+      padding: 5px 10px;
+      border-radius: 8px;
+    }
+
+    .brightness-tip {
+      font-size: 0.75rem;
+      color: var(--gold-light);
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #10b981;
+      color: #04130e;
+      font-weight: 800;
+      font-size: 0.8rem;
+      padding: 9px 16px;
+      border-radius: 999px;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.2s ease;
+      z-index: 200;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    .lock-btn { background: rgba(255,255,255,0.08); border: 1px solid var(--border-subtle); color: #fff; width: 36px; height: 36px; border-radius: 50%; font-size: 1rem; cursor: pointer; touch-action: manipulation; flex-shrink: 0; }
+    .header-right { display: flex; align-items: center; gap: 8px; }
+    .qr-locked { width: 205px; height: 205px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; color: #04130e; font-weight: 800; font-size: 0.85rem; text-align: center; }
+    .qr-locked span { font-size: 2.4rem; }
+    .vault-overlay { position: fixed; inset: 0; z-index: 150; background: rgba(2,10,7,0.92); display: none; align-items: center; justify-content: center; padding: 20px; }
+    .vault-overlay.open { display: flex; }
+    .vault-box { width: 100%; max-width: 380px; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+    .vault-box h3 { font-size: 1.05rem; }
+    .vault-hint { font-size: 0.8rem; color: var(--text-muted); line-height: 1.45; }
+    .vault-input { width: 100%; padding: 12px; border-radius: 11px; border: 1px solid var(--border-subtle); background: rgba(0,0,0,0.3); color: #fff; font-size: 16px; }
+    .vault-error { color: #fca5a5; font-size: 0.8rem; min-height: 16px; }
+    .vault-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-logo" aria-hidden="true">🦒</div>
+        <div>
+          <div class="brand-title">Pass Zoo & MNHN</div>
+          <div class="brand-sub" id="headerNames">Pass annuels SOLO</div>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="status-pill" id="validCountdownPill">
+          <span class="status-dot"></span>
+          <span id="daysRemainingText">Valable 14/11/2027</span>
+        </div>
+        <button class="lock-btn" id="vault-btn" onclick="onVaultButton()" aria-label="Coffre">🔒</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="pass-switcher" role="tablist" aria-label="Sélection du Pass">
+      <button class="switch-tab active" id="tab-both" onclick="switchPassView('both')">Les 2 Pass</button>
+      <button class="switch-tab" id="tab-1" onclick="switchPassView('1')">Thomas</button>
+      <button class="switch-tab" id="tab-2" onclick="switchPassView('2')">Marie</button>
+    </div>
+
+    <div class="passes-grid dual-mode" id="passesGrid">
+
+      <!-- PASS #1 -->
+      <article class="wallet-card" id="passCard1">
+        <div class="card-top">
+          <div>
+            <span class="museum-tag">Pass SOLO Annuel</span>
+            <h3 class="pass-name" id="holderLabel1">Thomas</h3>
+          </div>
+          <span class="pass-pill-num" id="passNum1">N° •••</span>
+        </div>
+
+        <div class="qr-section">
+          <div class="qr-frame" onclick="openScannerModal(1, 'qr')" title="Toucher pour agrandir">
+            <img id="qrImg1" alt="QR Code" style="display:none" /><div class="qr-locked" id="qrLocked1"><span>🔒</span>Toucher pour déverrouiller</div>
+          </div>
+          <div class="ticket-num-line">
+            Billet <strong id="ticketNum1">🔒 •••</strong> • Valable 14/11/2027
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="openScannerModal(1, 'qr')">
+            📲 Plein Écran QR
+          </button>
+          <button class="btn btn-secondary" onclick="openScannerModal(1, 'card')">
+            🪪 Carte Mobile
+          </button>
+          <button class="btn btn-secondary" onclick="openVaultFile('pass-1-eticket')">
+            📄 PDF
+          </button>
+        </div>
+      </article>
+
+      <!-- PASS #2 -->
+      <article class="wallet-card" id="passCard2">
+        <div class="card-top">
+          <div>
+            <span class="museum-tag">Pass SOLO Annuel</span>
+            <h3 class="pass-name" id="holderLabel2">Marie</h3>
+          </div>
+          <span class="pass-pill-num" id="passNum2">N° •••</span>
+        </div>
+
+        <div class="qr-section">
+          <div class="qr-frame" onclick="openScannerModal(2, 'qr')" title="Toucher pour agrandir">
+            <img id="qrImg2" alt="QR Code" style="display:none" /><div class="qr-locked" id="qrLocked2"><span>🔒</span>Toucher pour déverrouiller</div>
+          </div>
+          <div class="ticket-num-line">
+            Billet <strong id="ticketNum2">🔒 •••</strong> • Valable 14/11/2027
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <button class="btn btn-primary" onclick="openScannerModal(2, 'qr')">
+            📲 Plein Écran QR
+          </button>
+          <button class="btn btn-secondary" onclick="openScannerModal(2, 'card')">
+            🪪 Carte Mobile
+          </button>
+          <button class="btn btn-secondary" onclick="openVaultFile('pass-2-eticket')">
+            📄 PDF
+          </button>
+        </div>
+      </article>
+
+    </div>
+
+    <details class="footer-details">
+      <summary>
+        <span>ℹ️ Infos Dossier MNHN & PDF</span>
+        <span>▾</span>
+      </summary>
+      <div class="details-body">
+        <div>
+          Dossier n° <strong id="infoDossier">🔒 •••</strong> • Compte : <strong id="infoEmail">🔒 •••</strong> • Adhérent n° <strong id="infoAdherent">🔒 •••</strong><br/>
+          Accès illimité : Zoo de Vincennes, Ménagerie, Jardin des Plantes & Galeries, Musée de l'Homme.
+        </div>
+        <div class="details-links">
+          <button class="btn btn-secondary" onclick="openVaultFile('recapitulatif')">🧾 Facture PDF</button>
+          <button class="btn btn-secondary" onclick="openVaultFile('pass-1-mobile')">📱 Pass #1 Mobile</button>
+          <button class="btn btn-secondary" onclick="openVaultFile('pass-2-mobile')">📱 Pass #2 Mobile</button>
+        </div>
+      </div>
+    </details>
+  </main>
+
+  <div class="modal-overlay" id="scannerModal" role="dialog" aria-modal="true">
+    <div class="modal-top">
+      <div class="modal-pass-switch">
+        <button class="modal-pill-btn active" id="modalBtnPass1" onclick="setModalPass(1)">Thomas</button>
+        <button class="modal-pill-btn" id="modalBtnPass2" onclick="setModalPass(2)">Marie</button>
+        <button class="modal-pill-btn" id="modalBtnModeToggle" onclick="toggleModalMode()">🪪 Carte</button>
+      </div>
+      <button class="modal-close" onclick="closeScannerModal()" aria-label="Fermer">✕</button>
+    </div>
+
+    <div class="modal-center">
+      <div class="modal-qr-box" id="modalQrContainer">
+        <img id="modalQrImg" alt="QR Code Plein Écran" />
+      </div>
+      <div class="modal-card-preview" id="modalCardContainer" style="display:none;">
+        <img id="modalCardImg" alt="Carte Mobile Officielle" />
+      </div>
+      <div class="modal-title" id="modalTitle"></div>
+      <div class="modal-sub" id="modalSub"></div>
+      <div class="modal-code" id="modalCode"></div>
+    </div>
+
+    <div class="brightness-tip">
+      ☀️ Luminosité au maximum recommandée aux portiques
+    </div>
+  </div>
+
+  <div class="vault-overlay" id="vault-modal" onclick="if(event.target===this) closeVaultModal()">
+    <form class="vault-box" onsubmit="event.preventDefault(); unlockVaultFromForm();">
+      <h3>🔒 Pass verrouillés</h3>
+      <p class="vault-hint">QR codes, billets et PDF sont chiffrés. Même mot de passe que le coffre de Voyages-Voyages ; à saisir une seule fois : cet appareil restera déverrouillé.</p>
+      <input id="vault-pass" class="vault-input" type="password" autocomplete="current-password" placeholder="Mot de passe du coffre" />
+      <div class="vault-error" id="vault-error"></div>
+      <div class="vault-actions">
+        <button type="button" class="btn btn-secondary" onclick="closeVaultModal()">Annuler</button>
+        <button type="submit" class="btn btn-primary" style="grid-column:auto" id="vault-submit">Déverrouiller</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="toast" id="toast">Copié !</div>
+
+  <script src="assets/vault/data.js"></script>
+
+  <script>
+    /* Coffre chiffré (AES-GCM 256, clé PBKDF2-SHA256 600 000 it.) — même clé que Voyages-Voyages. */
+    const VAULT_KEY_STORAGE = "pass_zoo_vault_key_v1";
+    const SHARED_KEY_STORAGE = "voyages_vault_key_v1";
+    const VAULT = { key: null, secrets: null, urls: {} };
+    let EMBEDDED_ASSETS = { 1: {}, 2: {} };
+    const b64ToBytes = (b) => Uint8Array.from(atob(b.replace(/-/g, "+").replace(/_/g, "/")), c => c.charCodeAt(0));
+    const bytesToB64 = (u) => btoa(String.fromCharCode(...new Uint8Array(u)));
+    const vaultDecrypt = async (iv, ct, key) => new Uint8Array(await crypto.subtle.decrypt({ name: "AES-GCM", iv }, key, ct));
+
+    function setText(id, v) { const el = document.getElementById(id); if (el) el.textContent = v; }
+    function paintVault() {
+      const s = VAULT.secrets;
+      [1, 2].forEach(i => {
+        const p = s ? s.passes[i] : null;
+        const img = document.getElementById('qrImg' + i);
+        img.style.display = p ? '' : 'none';
+        if (p) img.src = p.qr; else img.removeAttribute('src');
+        document.getElementById('qrLocked' + i).style.display = p ? 'none' : '';
+        setText('passNum' + i, 'N° ' + (p ? p.num : '•••'));
+        setText('ticketNum' + i, p ? p.ticketNum : '🔒 •••');
+      });
+      setText('headerNames', s ? s.headerNames : 'Pass annuels SOLO');
+      setText('infoDossier', s ? s.dossier : '🔒 •••');
+      setText('infoEmail', s ? s.email : '🔒 •••');
+      setText('infoAdherent', s ? s.adherent : '🔒 •••');
+      const btn = document.getElementById('vault-btn');
+      btn.textContent = s ? '🔓' : '🔒';
+      renderHolders();
+    }
+    async function vaultUseRawKey(rawBytes, remember) {
+      const key = await crypto.subtle.importKey("raw", rawBytes, "AES-GCM", true, ["decrypt"]);
+      const v = window.PASS_VAULT;
+      const plain = await vaultDecrypt(b64ToBytes(v.iv), b64ToBytes(v.ct), key);
+      VAULT.key = key;
+      VAULT.secrets = JSON.parse(new TextDecoder().decode(plain)).secrets;
+      EMBEDDED_ASSETS = VAULT.secrets.passes;
+      if (remember) localStorage.setItem(VAULT_KEY_STORAGE, bytesToB64(rawBytes));
+      paintVault();
+    }
+    async function unlockVaultFromForm() {
+      const pass = document.getElementById("vault-pass").value;
+      const err = document.getElementById("vault-error");
+      const btn = document.getElementById("vault-submit");
+      if (!pass || !window.PASS_VAULT || !crypto.subtle) { err.textContent = "Coffre indisponible."; return; }
+      btn.disabled = true; err.textContent = "Vérification…";
+      try {
+        const v = window.PASS_VAULT;
+        const base = await crypto.subtle.importKey("raw", new TextEncoder().encode(pass), "PBKDF2", false, ["deriveKey"]);
+        const key = await crypto.subtle.deriveKey({ name: "PBKDF2", salt: b64ToBytes(v.salt), iterations: v.iter, hash: "SHA-256" },
+          base, { name: "AES-GCM", length: 256 }, true, ["decrypt"]);
+        await vaultUseRawKey(new Uint8Array(await crypto.subtle.exportKey("raw", key)), true);
+        err.textContent = ""; document.getElementById("vault-pass").value = "";
+        closeVaultModal(); showToast("🔓 Pass déverrouillés sur cet appareil");
+        if (navigator.vibrate) navigator.vibrate(15);
+      } catch (e) {
+        err.textContent = "Mot de passe incorrect.";
+      } finally { btn.disabled = false; }
+    }
+    async function vaultObjectUrl(id) {
+      if (VAULT.urls[id]) return VAULT.urls[id];
+      const res = await fetch("assets/vault/docs/" + id + ".enc");
+      if (!res.ok) throw new Error("fetch");
+      const buf = new Uint8Array(await res.arrayBuffer());
+      const plain = await vaultDecrypt(buf.slice(0, 12), buf.slice(12), VAULT.key);
+      const mime = (window.PASS_VAULT.docs || {})[id] || "application/pdf";
+      return (VAULT.urls[id] = URL.createObjectURL(new Blob([plain], { type: mime })));
+    }
+    async function openVaultFile(id) {
+      if (!VAULT.key) { openVaultModal(); return; }
+      const w = window.open("", "_blank");
+      try {
+        const u = await vaultObjectUrl(id);
+        if (w) w.location.href = u; else location.href = u;
+      } catch (e) { if (w) w.close(); showToast("Document indisponible hors connexion"); }
+    }
+    function openVaultModal() {
+      document.getElementById("vault-modal").classList.add("open");
+      setTimeout(() => document.getElementById("vault-pass").focus(), 50);
+    }
+    function closeVaultModal() { document.getElementById("vault-modal").classList.remove("open"); }
+    function onVaultButton() {
+      if (!VAULT.secrets) { openVaultModal(); return; }
+      if (confirm("Verrouiller les pass sur cet appareil ? Il faudra ressaisir le mot de passe.")) {
+        localStorage.removeItem(VAULT_KEY_STORAGE);
+        VAULT.key = null; VAULT.secrets = null; VAULT.urls = {}; EMBEDDED_ASSETS = { 1: {}, 2: {} };
+        closeScannerModal(); paintVault(); showToast("🔒 Pass verrouillés");
+      }
+    }
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg; t.classList.add('show');
+      clearTimeout(showToast._t); showToast._t = setTimeout(() => t.classList.remove('show'), 2200);
+    }
+    async function initVault() {
+      const m = location.hash.match(/cle=([A-Za-z0-9_-]+)/);
+      if (m) history.replaceState(null, "", location.pathname + location.search);
+      for (const [raw, remember] of [[m && m[1], true], [localStorage.getItem(VAULT_KEY_STORAGE), false], [localStorage.getItem(SHARED_KEY_STORAGE), true]]) {
+        if (!raw) continue;
+        try { await vaultUseRawKey(b64ToBytes(raw), remember); return; } catch (e) {}
+      }
+      localStorage.removeItem(VAULT_KEY_STORAGE);
+      paintVault();
+    }
+
+    let currentModalPass = 1;
+    let currentModalMode = 'qr'; // 'qr' or 'card'
+
+    // Nettoie les anciens libellés v1/v2 du localStorage
+    localStorage.removeItem('zoo_pass_holder_1');
+    localStorage.removeItem('zoo_pass_holder_2');
+
+    function getHolderName(passIdx) {
+      return localStorage.getItem('zoo_pass_holder_v3_' + passIdx) || EMBEDDED_ASSETS[passIdx].defaultHolder || (passIdx === 1 ? 'Thomas' : 'Marie');
+    }
+
+    function renderHolders() {
+      [1, 2].forEach(idx => {
+        const name = getHolderName(idx);
+        const el = document.getElementById('holderLabel' + idx);
+        if (el) el.textContent = name;
+      });
+    }
+
+    function switchPassView(mode) {
+      ['both', '1', '2'].forEach(m => {
+        document.getElementById('tab-' + m).classList.toggle('active', m === mode);
+      });
+      const grid = document.getElementById('passesGrid');
+      const card1 = document.getElementById('passCard1');
+      const card2 = document.getElementById('passCard2');
+
+      if (mode === 'both') {
+        grid.classList.add('dual-mode');
+        card1.style.display = '';
+        card2.style.display = '';
+      } else if (mode === '1') {
+        grid.classList.remove('dual-mode');
+        card1.style.display = '';
+        card2.style.display = 'none';
+      } else {
+        grid.classList.remove('dual-mode');
+        card1.style.display = 'none';
+        card2.style.display = '';
+      }
+    }
+
+    function openScannerModal(passIdx, mode) {
+      if (!VAULT.secrets) { openVaultModal(); return; }
+      currentModalPass = passIdx;
+      currentModalMode = mode || 'qr';
+      updateModalUI();
+      document.getElementById('scannerModal').classList.add('open');
+    }
+
+    function closeScannerModal() {
+      document.getElementById('scannerModal').classList.remove('open');
+    }
+
+    function setModalPass(passIdx) {
+      currentModalPass = passIdx;
+      updateModalUI();
+    }
+
+    function toggleModalMode() {
+      currentModalMode = currentModalMode === 'qr' ? 'card' : 'qr';
+      updateModalUI();
+    }
+
+    function updateModalUI() {
+      const item = EMBEDDED_ASSETS[currentModalPass];
+      const holder = getHolderName(currentModalPass);
+      document.getElementById('modalBtnPass1').classList.toggle('active', currentModalPass === 1);
+      document.getElementById('modalBtnPass2').classList.toggle('active', currentModalPass === 2);
+
+      const qrBox = document.getElementById('modalQrContainer');
+      const cardBox = document.getElementById('modalCardContainer');
+      const toggleBtn = document.getElementById('modalBtnModeToggle');
+
+      if (currentModalMode === 'qr') {
+        qrBox.style.display = '';
+        cardBox.style.display = 'none';
+        document.getElementById('modalQrImg').src = item.qr;
+        toggleBtn.textContent = '🪪 Carte';
+      } else {
+        qrBox.style.display = 'none';
+        cardBox.style.display = '';
+        document.getElementById('modalCardImg').src = item.card;
+        toggleBtn.textContent = '🔳 QR';
+      }
+
+      document.getElementById('modalTitle').textContent = holder;
+      document.getElementById('modalSub').textContent = `Billet n° ${item.ticketNum} • Valable jusqu'au 14/11/2027`;
+      document.getElementById('modalCode').textContent = item.code;
+    }
+
+    function updateDaysCountdown() {
+      const exp = new Date('2027-11-14T23:59:59');
+      const now = new Date();
+      const diffDays = Math.ceil((exp - now) / (1000 * 60 * 60 * 24));
+      const el = document.getElementById('daysRemainingText');
+      if (diffDays > 0) {
+        el.textContent = `Valable 14/11/2027`;
+      } else {
+        el.textContent = `Expiré`;
+      }
+    }
+
+    // Initialise le coffre (clé mémorisée sur l'appareil) puis l'affichage
+    renderHolders();
+    initVault();
+    updateDaysCountdown();
+
+    // Register Service Worker for offline usage & actively purge old caches
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        if ('caches' in window) {
+          caches.keys().then(keys => {
+            keys.forEach(k => {
+              if (k !== 'pass-zoo-mnhn-v5') caches.delete(k);
+            });
+          });
+        }
+        navigator.serviceWorker.register('./sw.js?v=5').then((reg) => {
+          reg.update();
+        }).catch(() => {});
+      });
+    }
+
+    // Escape key closes modal
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeScannerModal();
+    });
+  </script>
+</body>
+</html>
